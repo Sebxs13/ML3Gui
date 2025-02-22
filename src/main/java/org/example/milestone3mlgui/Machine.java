@@ -36,19 +36,19 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
                 awaitingRead = true;
                 return " Enter a word (Max 4-digit number). Press Enter to continue:\n";
             } else if (command / 100 == 11) {//write
-                returnValue = write(argument);
+                returnValue += write(argument)+"\n";
             } else if (command / 100 == 20) {//load
-                returnValue = load(argument);
+                returnValue += load(argument)+"\n";
             } else if (command / 100 == 21) {//store
-                returnValue = store(argument);
+                returnValue += store(argument)+"\n";
             } else if (command / 100 == 30) {//add
-                returnValue = add(argument);
+                returnValue += add(argument)+"\n";
             } else if (command / 100 == 31) {//subtract
-                returnValue = subtract(argument);
+                returnValue += subtract(argument)+"\n";
             } else if (command / 100 == 32) {//divide
-                returnValue = divide(argument);
+                returnValue += divide(argument)+"\n";
             } else if (command / 100 == 33) {//multiply
-                returnValue = multiply(argument);
+                returnValue += multiply(argument)+"\n";
             } else if (command / 100 == 40) {//branch
                 index = branch(argument);
             } else if (command / 100 == 41) {//branchneg
@@ -85,19 +85,19 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
                     awaitingRead = true;
                     return " Enter a word (Max 4-digit number). Press Enter to continue:\n";
                 } else if (command / 100 == 11) {//write
-                    returnValue += write(argument);
+                    returnValue += write(argument)+"\n";
                 } else if (command / 100 == 20) {//load
-                    returnValue += load(argument);
+                    returnValue += load(argument)+"\n";
                 } else if (command / 100 == 21) {//store
-                    returnValue = store(argument);
+                    returnValue += store(argument)+"\n";
                 } else if (command / 100 == 30) {//add
-                    returnValue = add(argument);
+                    returnValue += add(argument)+"\n";
                 } else if (command / 100 == 31) {//subtract
-                    returnValue = subtract(argument);
+                    returnValue += subtract(argument)+"\n";
                 } else if (command / 100 == 32) {//divide
-                    returnValue = divide(argument);
+                    returnValue += divide(argument)+"\n";
                 } else if (command / 100 == 33) {//multiply
-                    returnValue = multiply(argument);
+                    returnValue += multiply(argument)+"\n";
                 } else if (command / 100 == 40) {//branch
                     index = branch(argument);
                 } else if (command / 100 == 41) {//branchneg

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class MLGuiController {
     private static MLGuiController instance;
     Machine m;
-    String returnString;
+    String returnString="";
 
     //TODO working on a method of setting and getting Gui Memory, sorry this still isn't ready yet
 
@@ -70,14 +70,13 @@ public class MLGuiController {
         MemGuiToMachine();
         returnString = m.run(instance);
         if(m.awaitingRead) {
+            OutputArea.setText(OutputArea.getText() + returnString);
             InputArea.setOnKeyReleased(event -> handleKeyRelease(event));
         }
     }
 
     private void handleKeyRelease(KeyEvent keyEvent){
-        if(m.awaitingRead){
-            OutputArea.setText(OutputArea.getText() + returnString);
-        }
+
             if (keyEvent.getCode() == KeyCode.ENTER) {
                 String userInput = InputArea.getText().trim();
                 InputArea.clear();
@@ -85,6 +84,7 @@ public class MLGuiController {
                     if (userInput.length() <= 4) {
                         int word = Integer.parseInt(userInput);
                         OutputArea.setText(OutputArea.getText() + "User entered" + word + "\n");
+                        returnString = "";
                         m.read(word);
                     } else {
                         OutputArea.setText(OutputArea.getText() + "Invalid input. Must be a 4-digit number.\n");
@@ -93,8 +93,8 @@ public class MLGuiController {
                     System.out.println(userInput);
                     OutputArea.setText(OutputArea.getText() + "User input is not a number. Try again\n");
                 }
-                m.run2();
-
+                returnString = m.run2();
+                OutputArea.setText(OutputArea.getText() + returnString);
 
             }
     }
