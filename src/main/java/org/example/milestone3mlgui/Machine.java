@@ -13,7 +13,7 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
     Memory memory;
     int accumulator = 0;
     int index;
-    boolean userInput = false;
+
     boolean awaitingRead;
 
     public Machine(){
@@ -21,7 +21,7 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
     } //todo Accumulator and index implementation
 
     //run
-    public void run(MLGuiController controller)  { //todo revamped run that goes step by step and returns strings
+    public String run(MLGuiController controller)  { //todo revamped run that goes step by step and returns strings
         //while loop
 
         boolean finished = false;
@@ -34,8 +34,7 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
             int argument = command % 100;
             if (command / 100 == 10) {//read
                 awaitingRead = true;
-                finished = true;
-                userInput = false;
+                return " Enter a word (Max 4-digit number). Press Enter to continue:\n";
             } else if (command / 100 == 11) {//write
                 returnValue = write(argument);
             } else if (command / 100 == 20) {//load
@@ -71,9 +70,10 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
             //finished = true; //for testing purposes I've closed this loop until we begin actually developing it (Austin Pendley 2/1/2025)
             index++;
         }
+        return "";
     }
 
-    public void run2(){
+    public String run2(){
         if(awaitingRead){
             awaitingRead = false;
             boolean finished = false;
@@ -83,12 +83,11 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
                 int argument = command % 100;
                 if (command / 100 == 10) {//read
                     awaitingRead = true;
-                    finished = true;
-                    userInput = false;
+                    return " Enter a word (Max 4-digit number). Press Enter to continue:\n";
                 } else if (command / 100 == 11) {//write
-                    returnValue = write(argument);
+                    returnValue += write(argument);
                 } else if (command / 100 == 20) {//load
-                    returnValue = load(argument);
+                    returnValue += load(argument);
                 } else if (command / 100 == 21) {//store
                     returnValue = store(argument);
                 } else if (command / 100 == 30) {//add
@@ -121,6 +120,7 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
                 index++;
             }
         }
+        return"";
     }
 
     //load
@@ -131,11 +131,11 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
     }
 
     //read
-    public void read(int i,MLGuiController controller){
+    /*public void read(int i,MLGuiController controller){
         System.out.print("Enter a word (Max 4-digit number). Press Enter to continue:");
             controller.requestInput();
-    }
-    public void recieveInput(int word){
+    }*/
+    public void read(int word){
         memory.setWordSingle(index,word);
     }
 

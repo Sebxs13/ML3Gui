@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class MLGuiController {
     private static MLGuiController instance;
     Machine m;
+    String returnString;
 
     //TODO working on a method of setting and getting Gui Memory, sorry this still isn't ready yet
 
@@ -60,7 +61,6 @@ public class MLGuiController {
 
     @FXML
     private Text OutputArea;
-    //OutputArea.setText(OutputArea.getText() + "This message is sent to screen\n");
 
     @FXML
     private Label ACCIDXLabel;
@@ -68,22 +68,43 @@ public class MLGuiController {
     @FXML
     protected void onRunButtonClick(){
         MemGuiToMachine();
-        m.run(instance);
-        InputArea.setOnKeyReleased(event ->handleKeyRelease(event));
+        returnString = m.run(instance);
+        if(m.awaitingRead) {
+            InputArea.setOnKeyReleased(event -> handleKeyRelease(event));
+        }
     }
 
     private void handleKeyRelease(KeyEvent keyEvent){
-        if (keyEvent.getCode()== KeyCode.ENTER) {
-            m.run2();
+        if(m.awaitingRead){
+            OutputArea.setText(OutputArea.getText() + returnString);
         }
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                String userInput = InputArea.getText().trim();
+                InputArea.clear();
+                try {
+                    if (userInput.length() <= 4) {
+                        int word = Integer.parseInt(userInput);
+                        OutputArea.setText(OutputArea.getText() + "User entered" + word + "\n");
+                        m.read(word);
+                    } else {
+                        OutputArea.setText(OutputArea.getText() + "Invalid input. Must be a 4-digit number.\n");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println(userInput);
+                    OutputArea.setText(OutputArea.getText() + "User input is not a number. Try again\n");
+                }
+                m.run2();
 
+
+            }
     }
+    /*
     public static void requestInput(){
 
         if(instance != null){
             instance.OutputArea.setText("waiting for input");
         }
-    }
+    }*/
 
 
     @FXML
