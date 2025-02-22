@@ -9,7 +9,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.FileChooser;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class MLGuiController {
@@ -54,6 +57,7 @@ public class MLGuiController {
     @FXML
     private TextArea InputArea;
 
+
     @FXML
     private Text OutputArea;
     //OutputArea.setText(OutputArea.getText() + "This message is sent to screen\n");
@@ -90,6 +94,18 @@ public class MLGuiController {
 
         //if the file is valid, update the memory of the machine to reflect this memory change.
         //probably confirm to the user that the parse was successful
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Machine Language File");
+        File selectedFile = fileChooser.showOpenDialog(null);
+
+        if(selectedFile != null){
+            try {
+                m.parse(selectedFile);
+                OutputArea.setText("File successfully loaded into memory");
+            } catch (IllegalArgumentException | FileNotFoundException e) {
+                OutputArea.setText("Error: " + e.getMessage());
+            }
+        }
     }
 
 }
