@@ -4,21 +4,20 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import java.util.Scanner;
-
 //import static java.sql.Types.NULL;
 
 
-public class Machine {
+public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI CONTROLLER.
     //constructor: builds memory
     Memory memory;
     int accumulator = 0;
     Scanner scanner = new Scanner(System.in);
     public Machine(){
         memory = new Memory();
-    }
+    } //todo Accumulator and index implementation
+
     //run
-    public void run(){
+    public void run(){ //todo revamped run that goes step by step and returns strings
         //while loop
         boolean finished = false;
         accumulator = 0;
@@ -190,6 +189,7 @@ public class Machine {
         // leaves result in accumulator
         accumulator *= memory.getWordSingle(mem_index);
     }
+
     //branch
     public int branch(int i){
         return (i % 100) - 1;
@@ -199,6 +199,7 @@ public class Machine {
     public int branchneg(int i){
         return (accumulator < 0 ? i : -1) - 1;
     }
+
     //branchzero
     public int branchzero(int i){
         return (accumulator == 0 ? i : -1) - 1;

@@ -26,4 +26,10 @@ public class Memory {
     public void setWordSingle(int index, int value){
         wordlist[index] = value;
     }
+
+    public void printMemory(){
+        for(int i : wordlist){
+            System.out.println(i);
+        }
+    }
 }

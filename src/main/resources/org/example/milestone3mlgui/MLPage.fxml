@@ -21,7 +21,7 @@
         </ScrollPane>
         <HBox spacing="10">
             <Button text="File" onAction="#onFileButtonClick"/>
-            <Button text="Run"/>
+            <Button text="Run" onAction="#onRunButtonClick"/>
         </HBox>
     </VBox>
     <VBox alignment="BOTTOM_RIGHT" spacing="20.0">
