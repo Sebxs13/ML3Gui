@@ -13,6 +13,7 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
     int accumulator = 0;
     int index;
     boolean userInput = false;
+    boolean awaitingRead;
 
     public Machine(){
         memory = new Memory();
@@ -23,6 +24,7 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
         //while loop
 
         boolean finished = false;
+        awaitingRead = false;
         accumulator = 0;
         index = 0;
         String returnValue = "";
@@ -30,14 +32,8 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
             int command = memory.getWordSingle(index);
             int argument = command % 100;
             if (command / 100 == 10) {//read
-                read(argument, controller);
-                /*try {
-                    while (!userInput) {
-                        Thread.currentThread().wait(100);
-                    }
-                }catch (InterruptedException e){
-                    e.printStackTrace();
-                }*/
+                awaitingRead = true;
+                finished = true;
                 userInput = false;
             } else if (command / 100 == 11) {//write
                 returnValue = write(argument);
@@ -73,6 +69,56 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
             }
             //finished = true; //for testing purposes I've closed this loop until we begin actually developing it (Austin Pendley 2/1/2025)
             index++;
+        }
+    }
+
+    public void run2(){
+        if(awaitingRead){
+            awaitingRead = false;
+            boolean finished = false;
+            String returnValue = "";
+            while(!finished) {
+                int command = memory.getWordSingle(index);
+                int argument = command % 100;
+                if (command / 100 == 10) {//read
+                    awaitingRead = true;
+                    finished = true;
+                    userInput = false;
+                } else if (command / 100 == 11) {//write
+                    returnValue = write(argument);
+                } else if (command / 100 == 20) {//load
+                    returnValue = load(argument);
+                } else if (command / 100 == 21) {//store
+                    returnValue = store(argument);
+                } else if (command / 100 == 30) {//add
+                    returnValue = add(argument);
+                } else if (command / 100 == 31) {//subtract
+                    returnValue = subtract(argument);
+                } else if (command / 100 == 32) {//divide
+                    returnValue = divide(argument);
+                } else if (command / 100 == 33) {//multiply
+                    returnValue = multiply(argument);
+                } else if (command / 100 == 40) {//branch
+                    index = branch(argument);
+                } else if (command / 100 == 41) {//branchneg
+                    if (branchneg(argument) > 0) {
+                        index = branch(argument);
+                    }
+                } else if (command / 100 == 42) {//branchzero
+                    if (branchzero(argument) > 0) {
+                        index = branch(argument);
+                    }
+                } else if (command / 100 == 43) {//halt
+                    System.out.println("Halt reached Successfully");
+                    finished = true;
+                } else {
+                    System.out.println("Reached invalid line");
+                    finished = true;
+                    //invalid input
+                }
+                //finished = true; //for testing purposes I've closed this loop until we begin actually developing it (Austin Pendley 2/1/2025)
+                index++;
+            }
         }
     }
 

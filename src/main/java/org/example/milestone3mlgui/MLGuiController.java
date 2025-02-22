@@ -56,39 +56,21 @@ public class MLGuiController {
 
     @FXML
     private Text OutputArea;
+    //OutputArea.setText(OutputArea.getText() + "This message is sent to screen\n");
 
     @FXML
     private Label ACCIDXLabel;
 
     @FXML
     protected void onRunButtonClick(){
-        m.memory.setWordSingle(0,1000);
-        m.memory.setWordSingle(1,1023);
-        m.memory.setWordSingle(2,4301);
+        MemGuiToMachine();
         m.run(instance);
         InputArea.setOnKeyReleased(event ->handleKeyRelease(event));
-
     }
-    private void handleKeyRelease(KeyEvent keyEvent){
-        if (keyEvent.getCode()== KeyCode.ENTER && (m.memory.getWordSingle(m.index))/100 == 10) {
-            Platform.runLater(() -> {
-            String userInput = InputArea.getText().trim();
 
-                InputArea.clear();
-                try {
-                    if (userInput.length() <= 4) {
-                        int word = Integer.parseInt(userInput);
-                        OutputArea.setText("User entered" + word + "\n");
-                        m.recieveInput(word);
-                        m.userInput = true;
-                    }else {
-                        OutputArea.setText("Invalid input. Must be a 4-digit number.\n");
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println(userInput);
-                    OutputArea.setText("User input is not a number. Try again");
-                }
-            });
+    private void handleKeyRelease(KeyEvent keyEvent){
+        if (keyEvent.getCode()== KeyCode.ENTER) {
+            m.run2();
         }
 
     }
