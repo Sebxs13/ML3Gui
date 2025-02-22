@@ -1,16 +1,19 @@
 package org.example.milestone3mlgui;
 
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.input.KeyEvent;
 
 import java.util.ArrayList;
 
-
 public class MLGuiController {
-
+    private static MLGuiController instance;
     Machine m;
 
     //TODO working on a method of setting and getting Gui Memory, sorry this still isn't ready yet
@@ -41,6 +44,7 @@ public class MLGuiController {
     }
 
     public MLGuiController(){
+        instance = this;
         m = new Machine();//machine created when program is opened.
     }
 
@@ -58,7 +62,43 @@ public class MLGuiController {
 
     @FXML
     protected void onRunButtonClick(){
+        m.memory.setWordSingle(0,1000);
+        m.memory.setWordSingle(1,1023);
+        m.memory.setWordSingle(2,4301);
+        m.run(instance);
+        InputArea.setOnKeyReleased(event ->handleKeyRelease(event));
+
     }
+    private void handleKeyRelease(KeyEvent keyEvent){
+        if (keyEvent.getCode()== KeyCode.ENTER && (m.memory.getWordSingle(m.index))/100 == 10) {
+            Platform.runLater(() -> {
+            String userInput = InputArea.getText().trim();
+
+                InputArea.clear();
+                try {
+                    if (userInput.length() <= 4) {
+                        int word = Integer.parseInt(userInput);
+                        OutputArea.setText("User entered" + word + "\n");
+                        m.recieveInput(word);
+                        m.userInput = true;
+                    }else {
+                        OutputArea.setText("Invalid input. Must be a 4-digit number.\n");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println(userInput);
+                    OutputArea.setText("User input is not a number. Try again");
+                }
+            });
+        }
+
+    }
+    public static void requestInput(){
+
+        if(instance != null){
+            instance.OutputArea.setText("waiting for input");
+        }
+    }
+
 
     @FXML
     protected void onFileButtonClick(){
@@ -69,4 +109,5 @@ public class MLGuiController {
         //if the file is valid, update the memory of the machine to reflect this memory change.
         //probably confirm to the user that the parse was successful
     }
+
 }
