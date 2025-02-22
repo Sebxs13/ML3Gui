@@ -31,8 +31,10 @@ public class WordGui {
         id = i;
         hbox = new HBox();
         hbox.setAlignment(CENTER_LEFT);
+        hbox.setSpacing(5.0);
         idl = new Label();
-        idl.setText(Integer.toString(id));
+        idl.setText(String.format("%0" + 2 + "d", id));
+        idl.setPrefWidth(25.0);
         wordField = new TextField();
         wordField.setText("+0000");
 

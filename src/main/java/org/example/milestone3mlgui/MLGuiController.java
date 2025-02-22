@@ -1,7 +1,10 @@
 package org.example.milestone3mlgui;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
@@ -45,15 +48,20 @@ public class MLGuiController {
     private VBox MemContainer;
 
     @FXML
+    private TextArea InputArea;
+
+    @FXML
+    private Text OutputArea;
+
+    @FXML
+    private Label ACCIDXLabel;
+
+    @FXML
     protected void onRunButtonClick(){
-        MemGuiToMachine();
-        m.memory.printMemory(); //while testing this just displays
     }
 
     @FXML
     protected void onFileButtonClick(){
-        MemMachineToGui();
-
         //needs to accept a file (open a javafx file chooser)
 
         //if the file is at all invalid, do not update any memory and send an error message to our output field

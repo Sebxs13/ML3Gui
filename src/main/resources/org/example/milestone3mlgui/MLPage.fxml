@@ -15,20 +15,20 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
     <VBox spacing = "20.0">
-        <TextArea/>
+        <TextArea fx:id="InputArea"/>
         <ScrollPane prefHeight="300">
-            <Text>Write from Reg 92: 4</Text>
+            <Text fx:id="OutputArea"></Text>
         </ScrollPane>
         <HBox spacing="10">
             <Button text="File" onAction="#onFileButtonClick"/>
             <Button text="Run" onAction="#onRunButtonClick"/>
         </HBox>
     </VBox>
-    <VBox alignment="BOTTOM_RIGHT" spacing="20.0">
-        <ScrollPane prefWidth="400" prefHeight="500">
+    <VBox alignment="TOP_LEFT" spacing="20.0">
+        <ScrollPane prefWidth="600" prefHeight="415">
             <VBox fx:id="MemContainer">
             </VBox>
         </ScrollPane>
-        <Label>ACC: 0000    IDX: 0000</Label>
+        <Label fx:id="ACCIDXLabel">ACC: 0000    IDX: 0000</Label>
     </VBox>
 </HBox>
