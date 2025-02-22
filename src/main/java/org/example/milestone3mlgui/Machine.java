@@ -2,6 +2,7 @@ package org.example.milestone3mlgui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 //import static java.sql.Types.NULL;
@@ -100,29 +101,35 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
 
     //parse
     public void parse(File file) throws FileNotFoundException {
-        int word_size = 4;
         int min_value = -9999;
         int max_value = 9999;
         int index = 0;
         Scanner scanner = new Scanner(file);
+        ArrayList<Integer> tempMemory = new ArrayList<>();
 
-        while (scanner.hasNextLine() && index < 100) {
-            String line = scanner.nextLine().trim(); //parse through each line
-            try {
-                int value = Integer.parseInt(line); // convert a string in line as ints
-                if (value >= min_value && value <= max_value) {
-                    memory.setWordSingle(index, value);
-                } else {
-                    // catches words longer than 4 numbers
-                    System.err.println("Invalid word size (not " + word_size + ") at index " + index);
+        try {
+            while (scanner.hasNextLine() && index < 100) {
+                String line = scanner.nextLine().trim(); //parse through each line
+                try {
+                    int value = Integer.parseInt(line); // convert a string in line as ints
+                    if (value < min_value || value > max_value) {
+                        throw new IllegalArgumentException("Invalid value at index " + index + ": " + value + ". Value must 4 numbers long.");
+                    }
+                    tempMemory.add(value);
+                } catch (NumberFormatException e) {
+                    // catches words that are not numbers
+                    throw new IllegalArgumentException("Error parsing line " + index + ": " + line + " is not a valid word.");
                 }
-            } catch (NumberFormatException e) {
-                // catches words that are not numbers
-                System.err.println("Error parsing line " + index + ": " + line);
+                index++;
             }
-            index++;
+            // if validation is successful, then upload to memory
+            for (int i = 0; i < tempMemory.size(); i++) {
+                memory.setWordSingle(i, tempMemory.get(i));
+            }
+
+        } finally {
+            scanner.close();
         }
-        scanner.close();
     }
 
     //store
