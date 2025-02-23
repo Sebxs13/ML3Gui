@@ -25,7 +25,6 @@ public class Memory {
     //set single word
     public void setWordSingle(int index, int value){
         wordlist[index] = value;
-        //System.out.println(value+"and"+index);
     }
 
     public void printMemory(){
