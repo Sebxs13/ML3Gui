@@ -80,7 +80,6 @@ public class MLGuiController {
     private void handleKeyRelease(KeyEvent keyEvent){
         ACCIDXLabel.setText("ACC: "+m.accumulator+"    "+"IDX: "+m.index);
             if (keyEvent.getCode() == KeyCode.ENTER) {
-                System.out.println("got here");
                 String userInput = InputArea.getText().trim();
                 InputArea.clear();
                 try {
