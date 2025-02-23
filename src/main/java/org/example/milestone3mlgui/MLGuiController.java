@@ -73,11 +73,13 @@ public class MLGuiController {
             OutputArea.setText(OutputArea.getText() + returnString);
             InputArea.setOnKeyReleased(event -> handleKeyRelease(event));
         }
+
     }
 
     private void handleKeyRelease(KeyEvent keyEvent){
 
             if (keyEvent.getCode() == KeyCode.ENTER) {
+                System.out.println("got here");
                 String userInput = InputArea.getText().trim();
                 InputArea.clear();
                 try {
@@ -122,11 +124,12 @@ public class MLGuiController {
         if(selectedFile != null){
             try {
                 m.parse(selectedFile);
-                OutputArea.setText("File successfully loaded into memory");
+                OutputArea.setText("File successfully loaded into memory\n");
             } catch (IllegalArgumentException | FileNotFoundException e) {
                 OutputArea.setText("Error: " + e.getMessage());
             }
         }
+        MemMachineToGui();
     }
 
 }

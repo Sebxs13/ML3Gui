@@ -34,7 +34,9 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
             int argument = command % 100;
             if (command / 100 == 10) {//read
                 awaitingRead = true;
-                return " Enter a word (Max 4-digit number). Press Enter to continue:\n";
+                //index++;
+                returnValue+=" Enter a word (Max 4-digit number). Press Enter to continue:\n";
+                finished = true;
             } else if (command / 100 == 11) {//write
                 returnValue += write(argument)+"\n";
             } else if (command / 100 == 20) {//load
@@ -51,13 +53,16 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
                 returnValue += multiply(argument)+"\n";
             } else if (command / 100 == 40) {//branch
                 index = branch(argument);
+                returnValue += "branched to index:"+index+"\n";
             } else if (command / 100 == 41) {//branchneg
                 if (branchneg(argument) > 0) {
                     index = branch(argument);
+                    returnValue += "branched to index:"+index+"\n";
                 }
             } else if (command / 100 == 42) {//branchzero
                 if (branchzero(argument) > 0) {
                     index = branch(argument);
+                    returnValue += "branched to index:"+index+"\n";
                 }
             } else if (command / 100 == 43) {//halt
                 System.out.println("Halt reached Successfully");
@@ -70,7 +75,7 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
             //finished = true; //for testing purposes I've closed this loop until we begin actually developing it (Austin Pendley 2/1/2025)
             index++;
         }
-        return "";
+        return returnValue;
     }
 
     public String run2(){
@@ -83,7 +88,8 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
                 int argument = command % 100;
                 if (command / 100 == 10) {//read
                     awaitingRead = true;
-                    return " Enter a word (Max 4-digit number). Press Enter to continue:\n";
+                    returnValue+= " Enter a word (Max 4-digit number). Press Enter to continue:\n";
+                    finished = true;
                 } else if (command / 100 == 11) {//write
                     returnValue += write(argument)+"\n";
                 } else if (command / 100 == 20) {//load
@@ -100,13 +106,16 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
                     returnValue += multiply(argument)+"\n";
                 } else if (command / 100 == 40) {//branch
                     index = branch(argument);
+                    returnValue += "branched to index:"+index+"\n";
                 } else if (command / 100 == 41) {//branchneg
                     if (branchneg(argument) > 0) {
                         index = branch(argument);
+                        returnValue+= "branched to index:"+index+"\n";
                     }
                 } else if (command / 100 == 42) {//branchzero
                     if (branchzero(argument) > 0) {
                         index = branch(argument);
+                        returnValue = "branched to index:"+index+"\n";
                     }
                 } else if (command / 100 == 43) {//halt
                     System.out.println("Halt reached Successfully");
@@ -119,8 +128,9 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
                 //finished = true; //for testing purposes I've closed this loop until we begin actually developing it (Austin Pendley 2/1/2025)
                 index++;
             }
+            return returnValue;
         }
-        return"";
+        return "";
     }
 
     //load
