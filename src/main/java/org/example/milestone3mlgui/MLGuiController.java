@@ -97,7 +97,6 @@ public class MLGuiController {
                 }
                 returnString = m.run2();
                 OutputArea.setText(OutputArea.getText() + returnString);
-
             }
     }
     /*

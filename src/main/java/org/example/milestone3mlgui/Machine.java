@@ -13,6 +13,7 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
     Memory memory;
     int accumulator = 0;
     int index;
+    String returnValue;
 
     boolean awaitingRead;
 
@@ -28,13 +29,12 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
         awaitingRead = false;
         accumulator = 0;
         index = 0;
-        String returnValue = "";
+        returnValue = "";
         while(!finished){
             int command = memory.getWordSingle(index);
             int argument = command % 100;
             if (command / 100 == 10) {//read
                 awaitingRead = true;
-                //index++;
                 returnValue+=" Enter a word (Max 4-digit number). Press Enter to continue:\n";
                 finished = true;
             } else if (command / 100 == 11) {//write
@@ -82,7 +82,7 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
         if(awaitingRead){
             awaitingRead = false;
             boolean finished = false;
-            String returnValue = "";
+            returnValue = "";
             while(!finished) {
                 int command = memory.getWordSingle(index);
                 int argument = command % 100;
@@ -125,7 +125,6 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
                     finished = true;
                     //invalid input
                 }
-                //finished = true; //for testing purposes I've closed this loop until we begin actually developing it (Austin Pendley 2/1/2025)
                 index++;
             }
             return returnValue;
@@ -146,7 +145,7 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
             controller.requestInput();
     }*/
     public void read(int word){
-        memory.setWordSingle(index,word);
+        memory.setWordSingle(memory.getWordSingle(index) % 100,word);
     }
 
     //write
@@ -255,19 +254,19 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
             case 11://write
                 return "write a word from memory into the screen\n";
             case 20://load
-                return " store word from memory into the accumulator\n";
+                return "store word from memory into the accumulator\n";
             case 21://store
                 return "store word from accumulator into memory\n";
             case 30:// add
                 return "add a word from the accumulator with a word from memory, and store the results in the accumulator\n";
             case 31://subtract
-                return " subtract a word from the accumulator with a word from memory, and store the results in the accumulator\n";
+                return "subtract a word from the accumulator with a word from memory, and store the results in the accumulator\n";
             case 32://divide
-                return " divide a word from the accumulator with a word from memory, and store the results in the accumulator\n";
+                return "divide a word from the accumulator with a word from memory, and store the results in the accumulator\n";
             case 33://multiply
-                return" multiply a word from the accumulator with a word from memory, and store the results in the accumulator\n";
+                return"multiply a word from the accumulator with a word from memory, and store the results in the accumulator\n";
             case 40://branch
-                return " branch to a specific location in memory\n";
+                return"branch to a specific location in memory\n";
             case 41://branchneg
                 return"Branch to a specific location in memory if the accumulator is negative";
             case 42://branchzero
