@@ -32,8 +32,21 @@ public class WordGui {
         wordField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if(!isNowFocused){//a user has left a value in the text box
                 try{
-                    int a = Integer.parseInt(wordField.getText().substring(1));
-                    interp.setText(intToString(a));
+                    if(wordField.getText().charAt(0) == '-'){
+                        int b = Integer.parseInt(wordField.getText());
+                        if(b >= -9999 && b < 0){
+                            interp.setText("Value");
+                        } else {
+                            interp.setText("Improper Input");
+                        }
+                    } else if(wordField.getText().charAt(0) == '+') {
+                        int b = Integer.parseInt(wordField.getText().substring(1));
+                        if(b >= 0 && b < 10000){
+                            interp.setText(intToString(b));
+                        } else {
+                            interp.setText("Improper Input");
+                        }
+                    }
                 } catch(Exception e){
                     interp.setText("Improper Input");
                 }
@@ -59,8 +72,21 @@ public class WordGui {
     public void setValue(String a){
         wordField.setText(a);
         try{
-            int b = Integer.parseInt(wordField.getText().substring(1));
-            interp.setText(intToString(b));
+            if(wordField.getText().charAt(0) == '-'){
+                int b = Integer.parseInt(wordField.getText());
+                if(b >= -9999 && b < 0){
+                    interp.setText("Value");
+                } else {
+                    interp.setText("Improper Input");
+                }
+            } else if(wordField.getText().charAt(0) == '+') {
+                int b = Integer.parseInt(wordField.getText().substring(1));
+                if(b >= 0 && b < 10000){
+                    interp.setText(intToString(b));
+                } else {
+                    interp.setText("Improper Input");
+                }
+            }
         } catch(Exception e){
             interp.setText("Improper Input");
         }
@@ -74,31 +100,31 @@ public class WordGui {
         int command = word / 100;
         switch (command){
             case 10://read
-                return "read word from screen in to a location in memory.\n";
+                return "Read word from screen in to a location in memory.\n";
             case 11://write
-                return "write a word from memory into the screen\n";
+                return "Write a word from memory into the screen\n";
             case 20://load
-                return "store word from memory into the accumulator\n";
+                return "Store word from memory into the accumulator\n";
             case 21://store
-                return "store word from accumulator into memory\n";
+                return "Store word from accumulator into memory\n";
             case 30:// add
-                return "add a word from the accumulator with a word from memory, and store the results in the accumulator\n";
+                return "Add a word from the accumulator with a word from memory, and store the results in the accumulator\n";
             case 31://subtract
-                return "subtract a word from the accumulator with a word from memory, and store the results in the accumulator\n";
+                return "Subtract a word from the accumulator with a word from memory, and store the results in the accumulator\n";
             case 32://divide
-                return "divide a word from the accumulator with a word from memory, and store the results in the accumulator\n";
+                return "Divide a word from the accumulator with a word from memory, and store the results in the accumulator\n";
             case 33://multiply
-                return "multiply a word from the accumulator with a word from memory, and store the results in the accumulator\n";
+                return "Multiply a word from the accumulator with a word from memory, and store the results in the accumulator\n";
             case 40://branch
-                return "branch to a specific location in memory\n";
+                return "Branch to a specific location in memory\n";
             case 41://branchneg
                 return "Branch to a specific location in memory if the accumulator is negative";
             case 42://branchzero
                 return "Branch to a specific location in memory if the accumulator is zero";
             case 43://halt
-                return "halt: stops the program\n";
+                return "Halt: stops the program\n";
             default:
-                return "invalid command";
+                return "Value";
         }
     }
 }
