@@ -140,10 +140,6 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
     }
 
     //read
-    /*public void read(int i,MLGuiController controller){
-        System.out.print("Enter a word (Max 4-digit number). Press Enter to continue:");
-            controller.requestInput();
-    }*/
     public void read(int word){
         memory.setWordSingle(memory.getWordSingle(index) % 100,word);
     }
@@ -254,19 +250,19 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
             case 11://write
                 return "write a word from memory into the screen\n";
             case 20://load
-                return "store word from memory into the accumulator\n";
+                return " store word from memory into the accumulator\n";
             case 21://store
                 return "store word from accumulator into memory\n";
             case 30:// add
                 return "add a word from the accumulator with a word from memory, and store the results in the accumulator\n";
             case 31://subtract
-                return "subtract a word from the accumulator with a word from memory, and store the results in the accumulator\n";
+                return " subtract a word from the accumulator with a word from memory, and store the results in the accumulator\n";
             case 32://divide
-                return "divide a word from the accumulator with a word from memory, and store the results in the accumulator\n";
+                return " divide a word from the accumulator with a word from memory, and store the results in the accumulator\n";
             case 33://multiply
-                return"multiply a word from the accumulator with a word from memory, and store the results in the accumulator\n";
+                return" multiply a word from the accumulator with a word from memory, and store the results in the accumulator\n";
             case 40://branch
-                return"branch to a specific location in memory\n";
+                return " branch to a specific location in memory\n";
             case 41://branchneg
                 return"Branch to a specific location in memory if the accumulator is negative";
             case 42://branchzero

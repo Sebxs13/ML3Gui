@@ -69,6 +69,7 @@ public class MLGuiController {
     protected void onRunButtonClick(){
         MemGuiToMachine();
         returnString = m.run(instance);
+        ACCIDXLabel.setText("ACC: "+m.accumulator+"    "+"IDX: "+m.index);
         if(m.awaitingRead) {
             OutputArea.setText(OutputArea.getText() + returnString);
             InputArea.setOnKeyReleased(event -> handleKeyRelease(event));
@@ -77,7 +78,7 @@ public class MLGuiController {
     }
 
     private void handleKeyRelease(KeyEvent keyEvent){
-
+        ACCIDXLabel.setText("ACC: "+m.accumulator+"    "+"IDX: "+m.index);
             if (keyEvent.getCode() == KeyCode.ENTER) {
                 System.out.println("got here");
                 String userInput = InputArea.getText().trim();
@@ -87,6 +88,7 @@ public class MLGuiController {
                         int word = Integer.parseInt(userInput);
                         OutputArea.setText(OutputArea.getText() + "User entered" + word + "\n");
                         returnString = "";
+                        ACCIDXLabel.setText("ACC: "+m.accumulator+"    "+"IDX: "+m.index);
                         m.read(word);
                     } else {
                         OutputArea.setText(OutputArea.getText() + "Invalid input. Must be a 4-digit number.\n");
@@ -97,15 +99,9 @@ public class MLGuiController {
                 }
                 returnString = m.run2();
                 OutputArea.setText(OutputArea.getText() + returnString);
+                ACCIDXLabel.setText("ACC: "+m.accumulator+"    "+"IDX: "+m.index);
             }
     }
-    /*
-    public static void requestInput(){
-
-        if(instance != null){
-            instance.OutputArea.setText("waiting for input");
-        }
-    }*/
 
 
     @FXML
