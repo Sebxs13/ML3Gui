@@ -2,7 +2,7 @@
 
 #### Our goal is to create a program in java that works as a simple virtual machine. It will be capable of performing basicML programs. The purpose of this program is to teach students CS principles.
 
-#### The program has three classes: Main, Machine, and Memory. The Main class creates a machine object, and uses JFileChooser to prompt the user to choose a file. Afterwhich Machine calls two of its methods parse and run. Parse organizes the file into a readable format for the run function. Run goes through each basicML command and calls a use case depending on the contents of the command. The function of each use case is described below
+#### The program has five classes:  WordGui, MLGuiController, MLApplication, Machine, and Memory. WordGui and MLapplication work together to create the GUI. The MLGuiController bridges the gap between machine and the GUI, so that all the buttons work and the information displays. The two functions in Machine that pull everything together are Parse and Run. Parse organizes the file into a readable format for the run function. Run goes through each basicML command and calls a use case depending on the contents of the command. 
 
 ## How to Run Our program through Commandline:
 1. check that you have java installed
