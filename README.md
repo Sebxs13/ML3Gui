@@ -6,7 +6,7 @@
 
 ## How to Run Our program:
 1. check that you have java installed
-3. To manually run the program click on the zipfile
+3. To manually run the program click on the zipfile(If you have a macBook it may think the program is a virus go to System Prefernces-> privacy-> scroll down to open anyways)
 4. A window should appear you can now either update the list of commands by clicking in the boxes with numbers or click the file button to upload a file.
 5. Once the file is done uploading you can now click run the output text box will inform you of anything you have to enter in the input text box
 6. If the file does not run after clicking the run button, check the discriptions next to the list of commands(The descriptions will say whether the command is valid or not)
