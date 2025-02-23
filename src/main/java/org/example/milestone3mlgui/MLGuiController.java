@@ -1,7 +1,5 @@
 package org.example.milestone3mlgui;
 
-import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -19,8 +17,6 @@ public class MLGuiController {
     private static MLGuiController instance;
     Machine m;
     String returnString="";
-
-    //TODO working on a method of setting and getting Gui Memory, sorry this still isn't ready yet
 
     //Gui to Machine Memory (at run)
 
@@ -67,14 +63,20 @@ public class MLGuiController {
 
     @FXML
     protected void onRunButtonClick(){
-        MemGuiToMachine();
-        returnString = m.run(instance);
-        ACCIDXLabel.setText("ACC: "+m.accumulator+"    "+"IDX: "+m.index);
-        if(m.awaitingRead) {
-            OutputArea.setText(OutputArea.getText() + returnString);
-            InputArea.setOnKeyReleased(event -> handleKeyRelease(event));
+        m = new Machine();
+        try{
+            MemGuiToMachine();
+            returnString = m.run(instance);
+            ACCIDXLabel.setText("ACC: "+m.accumulator+"    "+"IDX: "+m.index);
+            if(m.awaitingRead) {
+                OutputArea.setText(OutputArea.getText() + returnString);
+                InputArea.setOnKeyReleased(event -> handleKeyRelease(event));
+            } else {
+                OutputArea.setText(OutputArea.getText() + returnString);
+            }
+        } catch(Exception e){
+            OutputArea.setText(OutputArea.getText() + "Cannot Run: Illegal Line\n");
         }
-
     }
 
     private void handleKeyRelease(KeyEvent keyEvent){
@@ -85,7 +87,7 @@ public class MLGuiController {
                 try {
                     if (userInput.length() <= 4) {
                         int word = Integer.parseInt(userInput);
-                        OutputArea.setText(OutputArea.getText() + "User entered" + word + "\n");
+                        OutputArea.setText(OutputArea.getText() + "User entered " + word + "\n");
                         returnString = "";
                         ACCIDXLabel.setText("ACC: "+m.accumulator+"    "+"IDX: "+m.index);
                         m.read(word);

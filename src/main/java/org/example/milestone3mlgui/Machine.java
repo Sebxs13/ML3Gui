@@ -8,7 +8,7 @@ import java.util.Scanner;
 //import static java.sql.Types.NULL;
 
 
-public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI CONTROLLER.
+public class Machine {
     //constructor: builds memory
     Memory memory;
     int accumulator = 0;
@@ -19,10 +19,10 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
 
     public Machine(){
         memory = new Memory();
-    } //todo Accumulator and index implementation
+    }
 
     //run
-    public String run(MLGuiController controller)  { //todo revamped run that goes step by step and returns strings
+    public String run(MLGuiController controller)  {
         //while loop
 
         boolean finished = false;
@@ -35,7 +35,7 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
             int argument = command % 100;
             if (command / 100 == 10) {//read
                 awaitingRead = true;
-                returnValue+=" Enter a word (Max 4-digit number). Press Enter to continue:\n";
+                returnValue+="Enter a word (Max 4-digit number). Press Enter to continue:\n";
                 finished = true;
             } else if (command / 100 == 11) {//write
                 returnValue += write(argument)+"\n";
@@ -65,10 +65,10 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
                     returnValue += "branched to index:"+index+"\n";
                 }
             } else if (command / 100 == 43) {//halt
-                System.out.println("Halt reached Successfully");
+                returnValue += "Halted Successfully!\n";
                 finished = true;
             } else {
-                System.out.println("Reached invalid line");
+                returnValue += "Reached an Invalid Input.\n";
                 finished = true;
                 //invalid input
             }
@@ -115,13 +115,13 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
                 } else if (command / 100 == 42) {//branchzero
                     if (branchzero(argument) > 0) {
                         index = branch(argument);
-                        returnValue = "branched to index:"+index+"\n";
+                        returnValue += "branched to index:"+index+"\n";
                     }
                 } else if (command / 100 == 43) {//halt
-                    System.out.println("Halt reached Successfully");
+                    returnValue += "Halted Successfully!\n";
                     finished = true;
                 } else {
-                    System.out.println("Reached invalid line");
+                    returnValue += "Reached an Invalid Input.\n";
                     finished = true;
                     //invalid input
                 }
@@ -136,12 +136,12 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
     public String load(int i){
         //add the number to the accumulator
         accumulator = memory.getWordSingle(i);
-        return accumulator +"loaded to accumulator";
+        return accumulator + " loaded to accumulator.";
     }
 
     //read
     public void read(int word){
-        memory.setWordSingle(memory.getWordSingle(index) % 100,word);
+        memory.setWordSingle(memory.getWordSingle(index - 1) % 100,word);
     }
 
     //write
@@ -186,7 +186,7 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
     //store
     public String store(int location){
         memory.setWordSingle(location, accumulator);
-        return accumulator +"stored at"+ location;
+        return accumulator +" stored at "+ location;
     }
 
 
@@ -197,7 +197,7 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
         int temp = accumulator;
 
         accumulator += memory.getWordSingle(mem_index); // updated just now
-        return temp + " and "+ memory.getWordSingle(mem_index)+"added. Added result:"+ accumulator;
+        return temp + " and "+ memory.getWordSingle(mem_index)+" added. Added result: "+ accumulator;
     }
 
 
@@ -215,7 +215,7 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
         // leaves result in accumulator
         int temp = accumulator;
         accumulator /= memory.getWordSingle(mem_index);
-        return temp+" and "+ memory.getWordSingle(mem_index)+"divided. Divided result:"+ accumulator;
+        return temp+" and "+ memory.getWordSingle(mem_index)+" divided. Divided result:"+ accumulator;
     }
 
     public String multiply(int mem_index){
@@ -223,7 +223,7 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
         // leaves result in accumulator
         int temp = accumulator;
         accumulator *= memory.getWordSingle(mem_index);
-        return temp+" and "+ memory.getWordSingle(mem_index)+"multiplied. Multiplied result:"+ accumulator;
+        return temp+" and "+ memory.getWordSingle(mem_index)+" multiplied. Multiplied result: "+ accumulator;
     }
 
     //branch
@@ -241,36 +241,4 @@ public class Machine { //TODO ALL THIS STUFF NEEDS TO BE ACCESSIBLE TO THE MLGUI
         return (accumulator == 0 ? i : -1) - 1;
     }
 
-    public String intToString(int word){
-        //i have realized that error trapping for order may be pointless
-        int command = word / 100;
-        switch (command){
-            case 10://read
-                return "read word from screen in to a location in memory.\n";
-            case 11://write
-                return "write a word from memory into the screen\n";
-            case 20://load
-                return " store word from memory into the accumulator\n";
-            case 21://store
-                return "store word from accumulator into memory\n";
-            case 30:// add
-                return "add a word from the accumulator with a word from memory, and store the results in the accumulator\n";
-            case 31://subtract
-                return " subtract a word from the accumulator with a word from memory, and store the results in the accumulator\n";
-            case 32://divide
-                return " divide a word from the accumulator with a word from memory, and store the results in the accumulator\n";
-            case 33://multiply
-                return" multiply a word from the accumulator with a word from memory, and store the results in the accumulator\n";
-            case 40://branch
-                return " branch to a specific location in memory\n";
-            case 41://branchneg
-                return"Branch to a specific location in memory if the accumulator is negative";
-            case 42://branchzero
-                return"Branch to a specific location in memory if the accumulator is zero";
-            case 43://hault
-                return"hault: stops the program\n";
-            default:
-                return "invalid command";
-        }
-    }
 }
