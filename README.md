@@ -6,6 +6,6 @@
 
 ## How to Run Our program on Commandline:
 1. check that you have java installed
-2. navagate to the correct directory(the file name should be CS2450-project)
+2. navagate to the correct directory(the file name should be ML3Gui)
 3. to manually run the program type in java - jar "filename".jar
 4. Then the program will be running and prompt you for a file which should contain your basicML commands
