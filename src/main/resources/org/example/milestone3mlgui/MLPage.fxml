@@ -9,7 +9,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.text.Text?>
 
-<HBox alignment="TOP_LEFT" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+<HBox alignment="TOP_LEFT" spacing="20.0" xmlns:fx="http://javafx.com/fxml" style= "-fx-background-color: #4C721D"
       fx:controller="org.example.milestone3mlgui.MLGuiController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
@@ -22,6 +22,8 @@
         <HBox spacing="10">
             <Button text="File" onAction="#onFileButtonClick"/>
             <Button text="Run" onAction="#onRunButtonClick"/>
+            <Button text="Settings" onAction="#onSettingsButtonClick"/>
+            <Button fx:id="Exit" text="Exit" onAction="#onExitButtonClick" disable="true" visible="false"/>
         </HBox>
     </VBox>
     <VBox alignment="TOP_LEFT" spacing="20.0">
