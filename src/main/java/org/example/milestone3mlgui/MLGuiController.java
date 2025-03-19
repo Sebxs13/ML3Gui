@@ -1,6 +1,7 @@
 package org.example.milestone3mlgui;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
@@ -60,6 +61,29 @@ public class MLGuiController {
 
     @FXML
     private Label ACCIDXLabel;
+    @FXML
+    Button Exit;
+
+    @FXML
+    protected void onSettingsButtonClick(){
+        //new window opens
+        MemContainer.setVisible(false);
+        Exit.setDisable(false);
+        Exit.setVisible(true);
+        OutputArea.setText("options in settings: \n1. change primary color \n2. change secondary color \n to exit settings click exit");
+        //take user input primary color
+        //take user input secondary color
+        //set primary
+        //set secondary
+    }
+    @FXML
+    protected void onExitButtonClick(){
+        MemContainer.setVisible(true);
+        Exit.setDisable(true);
+        Exit.setVisible(false);
+        OutputArea.setText("");
+
+    }
 
     @FXML
     protected void onRunButtonClick(){
