@@ -67,21 +67,28 @@ public class MLGuiController {
     @FXML
     protected void onSettingsButtonClick(){
         //new window opens
+        String input;
+        boolean stop = false;
         MemContainer.setVisible(false);
         Exit.setDisable(false);
         Exit.setVisible(true);
-        OutputArea.setText("options in settings: \n1. change primary color \n2. change secondary color \n to exit settings click exit");
+        OutputArea.setText("options in settings(enter 1 or 2): \n1. change primary color \n2. change secondary color \n to exit settings click exit");
+        InputArea.setOnKeyReleased(event -> handleKeyReleasept2(event, 1));
+        if(InputArea.getText().trim().equals('1')){
+            OutputArea.setText("to change primary color enter a HEX code");
+            InputArea.clear();
+        }else if(InputArea.getText().equals("2")){
+            OutputArea.setText("to change secondary color enter a HEX code");
+            InputArea.clear();
+        }
+
         //take user input primary color
         //take user input secondary color
         //set primary
         //set secondary
     }
     @FXML
-    protected void onExitButtonClick(){
-        MemContainer.setVisible(true);
-        Exit.setDisable(true);
-        Exit.setVisible(false);
-        OutputArea.setText("");
+    protected void onSaveButtonClick(){
 
     }
 
@@ -94,7 +101,7 @@ public class MLGuiController {
             ACCIDXLabel.setText("ACC: "+m.accumulator+"    "+"IDX: "+m.index);
             if(m.awaitingRead) {
                 OutputArea.setText(OutputArea.getText() + returnString);
-                InputArea.setOnKeyReleased(event -> handleKeyRelease(event));
+                InputArea.setOnKeyReleased(event -> handleKeyRelease(event, 4));
             } else {
                 OutputArea.setText(OutputArea.getText() + returnString);
             }
@@ -102,21 +109,37 @@ public class MLGuiController {
             OutputArea.setText(OutputArea.getText() + "Cannot Run: Illegal Line\n");
         }
     }
-
-    private void handleKeyRelease(KeyEvent keyEvent){
+    private void handleKeyReleasept2(KeyEvent event, int len){
+        if(event.getCode() == KeyCode.ENTER){
+            String userInput = InputArea.getText().trim();
+            try {
+                if (userInput.length() <= len) {
+                    int word = Integer.parseInt(userInput);
+                    OutputArea.setText(OutputArea.getText() + "User entered " + word + "\n");
+                    returnString = "";
+                } else {
+                    OutputArea.setText(OutputArea.getText() + "Invalid input. Must be a "+ len +"-digit number.\n");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println(userInput);
+                OutputArea.setText(OutputArea.getText() + "User input is not a number. Try again\n");
+            }
+        }
+    }
+    private void handleKeyRelease(KeyEvent keyEvent, int len){
         ACCIDXLabel.setText("ACC: "+m.accumulator+"    "+"IDX: "+m.index);
             if (keyEvent.getCode() == KeyCode.ENTER) {
                 String userInput = InputArea.getText().trim();
                 InputArea.clear();
                 try {
-                    if (userInput.length() <= 4) {
+                    if (userInput.length() <= len) {
                         int word = Integer.parseInt(userInput);
                         OutputArea.setText(OutputArea.getText() + "User entered " + word + "\n");
                         returnString = "";
                         ACCIDXLabel.setText("ACC: "+m.accumulator+"    "+"IDX: "+m.index);
                         m.read(word);
                     } else {
-                        OutputArea.setText(OutputArea.getText() + "Invalid input. Must be a 4-digit number.\n");
+                        OutputArea.setText(OutputArea.getText() + "Invalid input. Must be a "+ len +"-digit number.\n");
                     }
                 } catch (NumberFormatException e) {
                     System.out.println(userInput);

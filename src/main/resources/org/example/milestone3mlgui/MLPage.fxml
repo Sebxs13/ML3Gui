@@ -23,7 +23,7 @@
             <Button text="File" onAction="#onFileButtonClick"/>
             <Button text="Run" onAction="#onRunButtonClick"/>
             <Button text="Settings" onAction="#onSettingsButtonClick"/>
-            <Button fx:id="Exit" text="Exit" onAction="#onExitButtonClick" disable="true" visible="false"/>
+            <Button text="Save" onAction="#onSaveButtonClick" />
         </HBox>
     </VBox>
     <VBox alignment="TOP_LEFT" spacing="20.0">
