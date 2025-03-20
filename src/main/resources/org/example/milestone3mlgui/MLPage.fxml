@@ -9,28 +9,62 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.text.Text?>
 
-<HBox alignment="TOP_LEFT" spacing="20.0" xmlns:fx="http://javafx.com/fxml" style= "-fx-background-color: #4C721D"
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.ColorPicker?>
+<HBox fx:id="background1" alignment="TOP_LEFT" spacing="20.0" xmlns:fx="http://javafx.com/fxml" style= "-fx-background-color: #4C721D"
       fx:controller="org.example.milestone3mlgui.MLGuiController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-    <VBox spacing = "20.0">
-        <TextArea fx:id="InputArea"/>
-        <ScrollPane prefHeight="300">
-            <Text fx:id="OutputArea"></Text>
-        </ScrollPane>
-        <HBox spacing="10">
-            <Button text="File" onAction="#onFileButtonClick"/>
-            <Button text="Run" onAction="#onRunButtonClick"/>
-            <Button text="Settings" onAction="#onSettingsButtonClick"/>
-            <Button text="Save" onAction="#onSaveButtonClick" />
-        </HBox>
-    </VBox>
-    <VBox alignment="TOP_LEFT" spacing="20.0">
-        <ScrollPane prefWidth="600" prefHeight="415">
-            <VBox fx:id="MemContainer">
-            </VBox>
-        </ScrollPane>
-        <Label fx:id="ACCIDXLabel">ACC: 0000    IDX: 0000</Label>
-    </VBox>
+    <TabPane>
+        <Tab text ="Run">
+           <HBox spacing = "20.0">
+               <padding>
+                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+               </padding>
+               <VBox fx:id="interior3" spacing = "20.0">
+                   <TextArea fx:id="InputArea"/>
+                   <ScrollPane prefHeight="300">
+                       <Text fx:id="OutputArea"></Text>
+                   </ScrollPane>
+                   <HBox spacing="10">
+                       <Button text="File" onAction="#onFileButtonClick"/>
+                       <Button text="Run" onAction="#onRunButtonClick"/>
+                       <Button text="Save" onAction="#onSaveButtonClick" />
+                   </HBox>
+               </VBox>
+               <VBox fx:id="interior1" alignment="TOP_LEFT" spacing="20.0">
+                   <ScrollPane prefWidth="600" prefHeight="415">
+                       <VBox fx:id="MemContainer">
+                       </VBox>
+                   </ScrollPane>
+                   <Label fx:id="ACCIDXLabel">ACC: 0000    IDX: 0000</Label>
+               </VBox>
+           </HBox>
+        </Tab>
+        <Tab text ="Settings">
+            <HBox alignment="TOP_CENTER">
+
+                <padding>
+                    <Insets bottom="200.0" left="20.0" right="20.0" top="20.0"/>
+                </padding>
+                <VBox fx:id="interior2" alignment="TOP_CENTER" spacing = "10.0" style="-fx-background-color: white">
+                    <TextArea text="Choose color for application layout and submit" maxHeight="40" maxWidth="300"/>
+                    <TextArea text="Primary color:" maxHeight="10" maxWidth="150" />
+                    <ColorPicker fx:id="primaryColor">
+
+                    </ColorPicker>
+                    <TextArea text="Secondary color:" maxHeight="10" maxWidth="150"/>
+                    <ColorPicker fx:id="secondaryColor">
+
+                    </ColorPicker>
+                    <HBox>
+                        <Button text ="submit" onAction="#onSubmitButtonClick"/>
+                        <Button text="reset" onAction="#onResetButtonClick"/>
+                    </HBox>
+
+                </VBox>
+
+            </HBox>
+        </Tab>
+    </TabPane>
+
 </HBox>

@@ -1,11 +1,13 @@
 package org.example.milestone3mlgui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
@@ -55,38 +57,40 @@ public class MLGuiController {
     @FXML
     private TextArea InputArea;
 
-
     @FXML
     private Text OutputArea;
 
     @FXML
     private Label ACCIDXLabel;
     @FXML
-    Button Exit;
-
+    ColorPicker primaryColor;
     @FXML
-    protected void onSettingsButtonClick(){
-        //new window opens
-        String input;
-        boolean stop = false;
-        MemContainer.setVisible(false);
-        Exit.setDisable(false);
-        Exit.setVisible(true);
-        OutputArea.setText("options in settings(enter 1 or 2): \n1. change primary color \n2. change secondary color \n to exit settings click exit");
-        InputArea.setOnKeyReleased(event -> handleKeyReleasept2(event, 1));
-        if(InputArea.getText().trim().equals('1')){
-            OutputArea.setText("to change primary color enter a HEX code");
-            InputArea.clear();
-        }else if(InputArea.getText().equals("2")){
-            OutputArea.setText("to change secondary color enter a HEX code");
-            InputArea.clear();
-        }
-
-        //take user input primary color
-        //take user input secondary color
-        //set primary
-        //set secondary
+    ColorPicker secondaryColor;
+    @FXML
+    HBox background1;
+    @FXML
+    VBox interior1;
+    @FXML
+    VBox interior2;
+    @FXML
+    VBox interior3;
+    @FXML
+    protected void onSubmitButtonClick(){
+        Color color1 = primaryColor.getValue();
+        Color color2 = secondaryColor.getValue();
+        interior2.setBackground(Background.fill(color2));
+        interior1.setBackground(Background.fill(color2));
+        interior3.setBackground(Background.fill(color2));
+        background1.setBackground(Background.fill(color1));
     }
+    @FXML
+    protected void onResetButtonClick(){
+        interior2.setBackground(Background.fill(Paint.valueOf("white")));
+        interior1.setBackground(Background.fill(Paint.valueOf("white")));
+        interior3.setBackground(Background.fill(Paint.valueOf("white")));
+        background1.setBackground(Background.fill(Paint.valueOf("#4C721D")));
+    }
+
     @FXML
     protected void onSaveButtonClick(){
 
@@ -109,23 +113,7 @@ public class MLGuiController {
             OutputArea.setText(OutputArea.getText() + "Cannot Run: Illegal Line\n");
         }
     }
-    private void handleKeyReleasept2(KeyEvent event, int len){
-        if(event.getCode() == KeyCode.ENTER){
-            String userInput = InputArea.getText().trim();
-            try {
-                if (userInput.length() <= len) {
-                    int word = Integer.parseInt(userInput);
-                    OutputArea.setText(OutputArea.getText() + "User entered " + word + "\n");
-                    returnString = "";
-                } else {
-                    OutputArea.setText(OutputArea.getText() + "Invalid input. Must be a "+ len +"-digit number.\n");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println(userInput);
-                OutputArea.setText(OutputArea.getText() + "User input is not a number. Try again\n");
-            }
-        }
-    }
+
     private void handleKeyRelease(KeyEvent keyEvent, int len){
         ACCIDXLabel.setText("ACC: "+m.accumulator+"    "+"IDX: "+m.index);
             if (keyEvent.getCode() == KeyCode.ENTER) {
