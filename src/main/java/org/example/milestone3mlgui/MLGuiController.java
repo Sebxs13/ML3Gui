@@ -15,6 +15,7 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class MLGuiController {
     private static MLGuiController instance;
@@ -45,7 +46,12 @@ public class MLGuiController {
             }
         }
     }
-
+    public void addMLPlainText(){
+        ArrayList<WordGui> a = MLApplication.GuiMemory;
+        for(int i = 0; i < a.size(); i++){//get text
+            fileInputArea.appendText(a.get(i).getValue() +"\n");
+        }
+    }
     public MLGuiController(){
         instance = this;
         m = new Machine();//machine created when program is opened.
@@ -77,18 +83,25 @@ public class MLGuiController {
     VBox interior3;
     @FXML
     VBox interior4;
+    @FXML
+    TextArea fileInputArea;
 
     @FXML
-    protected void onSubmitfileButtonclick(){
-
-    }
-
-    public void addMLPlainText(){
+    public void onSubmitfileButtonclick(){
+        Scanner scan = new Scanner (fileInputArea.getText());
+        //TextField wordField = WordGui.wordField;
         ArrayList<WordGui> a = MLApplication.GuiMemory;
         for(int i = 0; i < a.size(); i++){
+            a.get(i).setValue(scan.nextLine());
+            //if(scan.nextLine().equals(0)){
+            //    i++;
+            //}
 
         }
+
     }
+
+
 
     @FXML
     protected void onSubmitButtonClick(){
@@ -179,6 +192,7 @@ public class MLGuiController {
             }
         }
         MemMachineToGui();
+        addMLPlainText();
     }
 
 }

@@ -52,9 +52,7 @@
                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
                 </padding>
                 <TextArea text="file in text version. Each line is a new MLcommand. Edits to text edit run code." maxHeight="40"/>
-                <ScrollPane prefWidth="600" prefHeight="415">
-                    <TextArea fx:id="fileInputArea"/>
-                </ScrollPane>
+                <TextArea fx:id="fileInputArea"/>
                 <Button text ="submit" onAction="#onSubmitfileButtonclick"/>
             </VBox>
         </Tab>
