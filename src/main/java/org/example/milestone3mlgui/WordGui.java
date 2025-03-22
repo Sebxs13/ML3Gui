@@ -82,6 +82,10 @@ public class WordGui {
         return 0; //should not be reached assuming that checks have already been made
     }
 
+    public String getStringValue(){
+        return wordField.getText();
+    }
+
     public void setValue(String a){
         wordField.setText(a);
         try{
@@ -131,13 +135,13 @@ public class WordGui {
             case 40://branch
                 return "Branch to a specific location in memory\n";
             case 41://branchneg
-                return "Branch to a specific location in memory if the accumulator is negative";
+                return "Branch to a specific location in memory if the accumulator is negative\n";
             case 42://branchzero
-                return "Branch to a specific location in memory if the accumulator is zero";
+                return "Branch to a specific location in memory if the accumulator is zero\n";
             case 43://halt
                 return "Halt: stops the program\n";
             default:
-                return "Value";
+                return "Value\n";
         }
     }
 }

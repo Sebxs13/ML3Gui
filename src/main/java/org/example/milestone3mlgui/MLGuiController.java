@@ -181,4 +181,66 @@ public class MLGuiController {
         MemMachineToGui();
     }
 
+    @FXML
+    protected void onAddButtonClick(){
+        System.out.println(AmountOfSelectedWordGui());
+        System.out.println(AmountOfAvailableLines());
+        if(AmountOfSelectedWordGui() == 0){
+            OutputArea.setText(OutputArea.getText() + "No Selected Locations\n");
+            return;
+        }
+        if(AmountOfSelectedWordGui() > AmountOfAvailableLines()){
+            OutputArea.setText(OutputArea.getText() + "Not enough blank lines at the end for requested addition\n");
+            return;
+        }
+        ArrayList<WordGui> a = MLApplication.GuiMemory;
+        AddLine(3);
+        for(int i = 99; i > -1; i--){
+            if(a.get(i).isChecked()){
+                AddLine(i);
+            }
+        }
+        for(WordGui i : a){
+            i.deselect();
+        }
+    }
+
+    @FXML
+    protected void onDeleteButtonClick(){
+        ArrayList<WordGui> a = MLApplication.GuiMemory;
+        for(WordGui i : a){
+            i.deselect();
+        }
+    }
+
+    public void AddLine(int index){
+        ArrayList<WordGui> a = MLApplication.GuiMemory;
+        for(int i = 99; i > index; i--){
+            String storage = a.get(i - 1).getStringValue();
+            a.get(i).setValue(storage);
+        }
+        a.get(index).setValue("+0000");
+    }
+
+    public int AmountOfAvailableLines(){
+        ArrayList<WordGui> a = MLApplication.GuiMemory;
+        for(int i = 99; i > 0; i--){
+            if(!a.get(i).getStringValue().equals("+0000")){
+                System.out.println(a.get(i).getStringValue());
+                return 99 - i;
+            }
+        }
+        return 99;
+    }
+
+    public int AmountOfSelectedWordGui(){
+        ArrayList<WordGui> a = MLApplication.GuiMemory;
+        int b = 0;
+        for(int i = 99; i > -1; i--){
+            if(a.get(i).isChecked()){
+                b++;
+            }
+        }
+        return b;
+    }
 }
