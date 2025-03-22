@@ -1,5 +1,6 @@
 package org.example.milestone3mlgui;
 
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -13,6 +14,7 @@ public class WordGui {
     Label idl; //leftmost label holding id
     TextField wordField; //textfield that holds the word
     Label interp; //rightmost label holding interpretation;
+    CheckBox cbox;
 
 
     public WordGui(int i){
@@ -20,6 +22,7 @@ public class WordGui {
         hbox = new HBox();
         hbox.setAlignment(CENTER_LEFT);
         hbox.setSpacing(5.0);
+        cbox = new CheckBox();
         idl = new Label();
         idl.setText(String.format("%0" + 2 + "d", id));
         idl.setPrefWidth(25.0);
@@ -27,7 +30,7 @@ public class WordGui {
         wordField.setText("+0000");
         interp = new Label();
         interp.setText("EMPTY");
-        hbox.getChildren().addAll(idl, wordField, interp);
+        hbox.getChildren().addAll(cbox, idl, wordField, interp);
 
         wordField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if(!isNowFocused){//a user has left a value in the text box
@@ -53,6 +56,16 @@ public class WordGui {
             }
         });
 
+    }
+
+    public boolean isChecked(){
+        return cbox.isSelected();
+    }
+
+    public void deselect(){
+        if(cbox.isSelected()){
+            cbox.setSelected(false);
+        }
     }
 
     public HBox gethbox(){

@@ -36,7 +36,12 @@
                        <VBox fx:id="MemContainer">
                        </VBox>
                    </ScrollPane>
-                   <Label fx:id="ACCIDXLabel">ACC: 0000    IDX: 0000</Label>
+                   <HBox spacing="10.0">
+
+                       <Button text="Add Line"/>
+                       <Button text="Delete Line"/>
+                       <Label fx:id="ACCIDXLabel">ACC: 0000    IDX: 0000</Label>
+                   </HBox>
                </VBox>
            </HBox>
         </Tab>
