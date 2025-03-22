@@ -75,12 +75,16 @@ public class MLGuiController {
     @FXML
     VBox interior3;
     @FXML
+    HBox interior4;
+
+    @FXML
     protected void onSubmitButtonClick(){
         Color color1 = primaryColor.getValue();
         Color color2 = secondaryColor.getValue();
         interior2.setBackground(Background.fill(color2));
         interior1.setBackground(Background.fill(color2));
         interior3.setBackground(Background.fill(color2));
+        interior4.setBackground(Background.fill(color2));
         background1.setBackground(Background.fill(color1));
     }
     @FXML
@@ -88,6 +92,7 @@ public class MLGuiController {
         interior2.setBackground(Background.fill(Paint.valueOf("white")));
         interior1.setBackground(Background.fill(Paint.valueOf("white")));
         interior3.setBackground(Background.fill(Paint.valueOf("white")));
+        interior4.setBackground(Background.fill(Paint.valueOf("white")));
         background1.setBackground(Background.fill(Paint.valueOf("#4C721D")));
     }
 
