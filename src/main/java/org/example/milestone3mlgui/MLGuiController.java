@@ -11,9 +11,9 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -85,6 +85,7 @@ public class MLGuiController {
     VBox interior2;
     @FXML
     VBox interior3;
+
     @FXML
     VBox interior4;
     @FXML
@@ -122,8 +123,37 @@ public class MLGuiController {
     }
 
     @FXML
-    protected void onSaveButtonClick(){
+    private Button saveButton;
 
+    @FXML
+    protected void onSaveButtonClick(){
+        Stage stage = (Stage) saveButton.getScene().getWindow(); // Get the current window
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+
+        File fileToSave = fileChooser.showSaveDialog(stage);
+
+        if (fileToSave != null) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileToSave))) {
+                for (WordGui wordGui : MLApplication.GuiMemory) {
+                    writer.write(wordGui.getValue() + "\n"); // Save each value
+                }
+                writer.flush();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText(null);
+                alert.setContentText("File saved successfully: " + fileToSave.getAbsolutePath());
+                alert.showAndWait();
+            } catch (IOException e) {
+                Alert errorAlert = new Alert(Alert.AlertType.INFORMATION);
+                errorAlert.setTitle("Error");
+                errorAlert.setHeaderText(null);
+                errorAlert.setContentText("Error saving file: " + e.getMessage());
+                errorAlert.showAndWait();
+            }
+        }
     }
 
     @FXML
