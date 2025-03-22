@@ -13,7 +13,7 @@ public class WordGui {
     HBox hbox; //container that holds labels and input field
     Label idl; //leftmost label holding id
     TextField wordField; //textfield that holds the word
-    Label interp; //rightmost label holding interpretation;
+    Label interp; //rightmost label holding interpretation
     CheckBox cbox;
 
 

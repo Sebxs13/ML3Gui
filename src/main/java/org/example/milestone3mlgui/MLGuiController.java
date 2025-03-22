@@ -221,6 +221,11 @@ public class MLGuiController {
     @FXML
     protected void onDeleteButtonClick(){
         ArrayList<WordGui> a = MLApplication.GuiMemory;
+        for(int i = 99; i > -1; i--){
+            if(a.get(i).isChecked()){
+                DeleteLine(i);
+            }
+        }
         for(WordGui i : a){
             i.deselect();
         }
@@ -233,6 +238,15 @@ public class MLGuiController {
             a.get(i).setValue(storage);
         }
         a.get(index).setValue("+0000");
+    }
+
+    public void DeleteLine(int index){
+        ArrayList<WordGui> a = MLApplication.GuiMemory;
+        for(int i = index; i < 99; i++){
+            String storage = a.get(i + 1).getStringValue();
+            a.get(i).setValue(storage);
+        }
+        a.get(99).setValue("+0000");
     }
 
     public int AmountOfAvailableLines(){
