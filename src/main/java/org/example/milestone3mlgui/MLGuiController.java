@@ -1,11 +1,13 @@
 package org.example.milestone3mlgui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
@@ -55,33 +57,42 @@ public class MLGuiController {
     @FXML
     private TextArea InputArea;
 
-
     @FXML
     private Text OutputArea;
 
     @FXML
     private Label ACCIDXLabel;
     @FXML
-    Button Exit;
-
+    ColorPicker primaryColor;
     @FXML
-    protected void onSettingsButtonClick(){
-        //new window opens
-        MemContainer.setVisible(false);
-        Exit.setDisable(false);
-        Exit.setVisible(true);
-        OutputArea.setText("options in settings: \n1. change primary color \n2. change secondary color \n to exit settings click exit");
-        //take user input primary color
-        //take user input secondary color
-        //set primary
-        //set secondary
+    ColorPicker secondaryColor;
+    @FXML
+    HBox background1;
+    @FXML
+    VBox interior1;
+    @FXML
+    VBox interior2;
+    @FXML
+    VBox interior3;
+    @FXML
+    protected void onSubmitButtonClick(){
+        Color color1 = primaryColor.getValue();
+        Color color2 = secondaryColor.getValue();
+        interior2.setBackground(Background.fill(color2));
+        interior1.setBackground(Background.fill(color2));
+        interior3.setBackground(Background.fill(color2));
+        background1.setBackground(Background.fill(color1));
     }
     @FXML
-    protected void onExitButtonClick(){
-        MemContainer.setVisible(true);
-        Exit.setDisable(true);
-        Exit.setVisible(false);
-        OutputArea.setText("");
+    protected void onResetButtonClick(){
+        interior2.setBackground(Background.fill(Paint.valueOf("white")));
+        interior1.setBackground(Background.fill(Paint.valueOf("white")));
+        interior3.setBackground(Background.fill(Paint.valueOf("white")));
+        background1.setBackground(Background.fill(Paint.valueOf("#4C721D")));
+    }
+
+    @FXML
+    protected void onSaveButtonClick(){
 
     }
 
@@ -94,7 +105,7 @@ public class MLGuiController {
             ACCIDXLabel.setText("ACC: "+m.accumulator+"    "+"IDX: "+m.index);
             if(m.awaitingRead) {
                 OutputArea.setText(OutputArea.getText() + returnString);
-                InputArea.setOnKeyReleased(event -> handleKeyRelease(event));
+                InputArea.setOnKeyReleased(event -> handleKeyRelease(event, 4));
             } else {
                 OutputArea.setText(OutputArea.getText() + returnString);
             }
@@ -103,20 +114,20 @@ public class MLGuiController {
         }
     }
 
-    private void handleKeyRelease(KeyEvent keyEvent){
+    private void handleKeyRelease(KeyEvent keyEvent, int len){
         ACCIDXLabel.setText("ACC: "+m.accumulator+"    "+"IDX: "+m.index);
             if (keyEvent.getCode() == KeyCode.ENTER) {
                 String userInput = InputArea.getText().trim();
                 InputArea.clear();
                 try {
-                    if (userInput.length() <= 4) {
+                    if (userInput.length() <= len) {
                         int word = Integer.parseInt(userInput);
                         OutputArea.setText(OutputArea.getText() + "User entered " + word + "\n");
                         returnString = "";
                         ACCIDXLabel.setText("ACC: "+m.accumulator+"    "+"IDX: "+m.index);
                         m.read(word);
                     } else {
-                        OutputArea.setText(OutputArea.getText() + "Invalid input. Must be a 4-digit number.\n");
+                        OutputArea.setText(OutputArea.getText() + "Invalid input. Must be a "+ len +"-digit number.\n");
                     }
                 } catch (NumberFormatException e) {
                     System.out.println(userInput);
