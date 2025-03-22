@@ -48,9 +48,9 @@
                 </padding>
                 <TextArea text="file in text version. Each line is a new MLcommand. Edits to text edit run code." maxHeight="40"/>
                 <ScrollPane prefWidth="600" prefHeight="415">
-                    <VBox fx:id="MemContainertext">
-                    </VBox>
+                    <TextArea fx:id="fileInputArea"/>
                 </ScrollPane>
+                <Button text ="submit" onAction="#onSubmitfileButtonclick"/>
             </VBox>
         </Tab>
         <Tab text ="Settings">

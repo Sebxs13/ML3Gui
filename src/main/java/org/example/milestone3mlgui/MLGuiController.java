@@ -54,6 +54,7 @@ public class MLGuiController {
     @FXML
     private VBox MemContainer;
 
+
     @FXML
     private TextArea InputArea;
 
@@ -75,7 +76,19 @@ public class MLGuiController {
     @FXML
     VBox interior3;
     @FXML
-    HBox interior4;
+    VBox interior4;
+
+    @FXML
+    protected void onSubmitfileButtonclick(){
+
+    }
+
+    public void addMLPlainText(){
+        ArrayList<WordGui> a = MLApplication.GuiMemory;
+        for(int i = 0; i < a.size(); i++){
+
+        }
+    }
 
     @FXML
     protected void onSubmitButtonClick(){
