@@ -158,6 +158,12 @@ public class MLGuiController {
 
     @FXML
     protected void onRunButtonClick(){
+        ArrayList<WordGui> a = MLApplication.GuiMemory;
+        for(WordGui i : a){
+            if(i.getStringValue().equals("-99999")){
+                i.setValue("+4300");
+            }
+        }
         m = new Machine();
         try{
             MemGuiToMachine();

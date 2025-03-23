@@ -47,6 +47,10 @@ public class WordGui {
                         if(b >= -9999 && b < 0){
                             interp.setText("Value");
                         } else {
+                            if(wordField.getText().equals("-99999")){
+                                interp.setText("Halt: stops the program\n");
+                                return;
+                            }
                             interp.setText("Improper Input");
                         }
                     } else if(wordField.getText().charAt(0) == '+') {
