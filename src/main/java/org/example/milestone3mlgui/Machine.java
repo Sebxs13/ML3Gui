@@ -156,30 +156,47 @@ public class Machine {
         int max_value = 9999;
         int index = 0;
         Scanner scanner = new Scanner(file);
-        ArrayList<Integer> tempMemory = new ArrayList<>();
+        StringBuilder errorMessages = new StringBuilder();
 
         try {
             while (scanner.hasNextLine() && index < 100) {
-                String line = scanner.nextLine().trim(); //parse through each line
+                int line = Integer.parseInt(scanner.nextLine().trim());
+                boolean isValid = true;
+
                 try {
-                    int value = Integer.parseInt(line); // convert a string in line as ints
+                    // Try to parse the line as an integer
+                    int value = Integer.parseInt(String.valueOf(line));
+
+                    // Validate if it's within the valid range
                     if (value < min_value || value > max_value) {
-                        throw new IllegalArgumentException("Invalid value at index " + index + ": " + value + ". Value must 4 numbers long.");
+                        errorMessages.append("Line ").append(index + 1).append(": ")
+                                .append(value).append(" (Out of range)\n");
+                        isValid = false;
                     }
-                    tempMemory.add(value);
+
+                    if (isValid) {
+                        // Store valid integer in memory
+                        memory.setWordSingle(index, value);
+                    }
+
                 } catch (NumberFormatException e) {
-                    // catches words that are not numbers
-                    throw new IllegalArgumentException("Error parsing line " + index + ": " + line + " is not a valid word.");
+                    // Handle non-numeric input and store it as a string
+                    errorMessages.append("Line ").append(index + 1).append(": '")
+                            .append(line).append("' (Invalid input)\n");
+
+                    // Store the word or non-numeric string as-is in memory
+                    memory.setWordSingle(index, line);  // Store as string in memory
                 }
+
                 index++;
             }
-            // if validation is successful, then upload to memory
-            for (int i = 0; i < tempMemory.size(); i++) {
-                memory.setWordSingle(i, tempMemory.get(i));
-            }
-
         } finally {
             scanner.close();
+        }
+
+        // Display errors if any
+        if (!errorMessages.isEmpty()) {
+            System.out.println("Errors encountered:\n" + errorMessages.toString());
         }
     }
 
