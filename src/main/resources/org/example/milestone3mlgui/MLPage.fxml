@@ -46,15 +46,17 @@
            </HBox>
         </Tab>
         <Tab text="file in plain text">
+            <HBox  alignment="TOP_CENTER" spacing= "20.0">
+                <VBox fx:id="interior4" alignment="TOP_LEFT" spacing="20.0">
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                    </padding>
+                    <TextArea text="file in text version. Each line is a new MLcommand. Edits to text edit run code." maxHeight="40"/>
+                    <TextArea fx:id="fileInputArea"/>
+                    <Button text ="submit" onAction="#onSubmitfileButtonclick"/>
+                </VBox>
+            </HBox>
 
-            <VBox fx:id="interior4" alignment="TOP_LEFT" spacing="20.0">
-                <padding>
-                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-                </padding>
-                <TextArea text="file in text version. Each line is a new MLcommand. Edits to text edit run code." maxHeight="40"/>
-                <TextArea fx:id="fileInputArea"/>
-                <Button text ="submit" onAction="#onSubmitfileButtonclick"/>
-            </VBox>
         </Tab>
         <Tab text ="Settings">
             <HBox alignment="TOP_CENTER">

@@ -1,9 +1,13 @@
 package org.example.milestone3mlgui;
 
+import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+
+import java.util.ArrayList;
 
 import static javafx.geometry.Pos.CENTER_LEFT;
 
@@ -15,6 +19,9 @@ public class WordGui {
     TextField wordField; //textfield that holds the word
     Label interp; //rightmost label holding interpretation;
     CheckBox cbox;
+
+    @FXML
+    TextArea fileInputArea;
 
 
     public WordGui(int i){
