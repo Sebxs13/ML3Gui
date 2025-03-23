@@ -28,7 +28,7 @@ public class MLApplication extends Application {
             GuiMemory.add(new WordGui(i));
         }
 
-        for(int i = 0; i < GuiMemory.size(); i++){
+        for (int i = 0; i < GuiMemory.size(); i++){
             v.getChildren().addAll(GuiMemory.get(i).gethbox());
         }
     }

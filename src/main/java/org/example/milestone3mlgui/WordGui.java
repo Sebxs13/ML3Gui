@@ -88,24 +88,36 @@ public class WordGui {
 
     public void setValue(String a){
         wordField.setText(a);
-        try{
-            if(wordField.getText().charAt(0) == '-'){
+        try {
+            // Check if the value is negative
+            if (wordField.getText().charAt(0) == '-') {
                 int b = Integer.parseInt(wordField.getText());
-                if(b >= -9999 && b < 0){
-                    interp.setText("Value");
+                if (b >= -9999 && b < 0) {
+                    interp.setText("Value: " + intToString(b));
                 } else {
-                    interp.setText("Improper Input");
-                }
-            } else if(wordField.getText().charAt(0) == '+') {
-                int b = Integer.parseInt(wordField.getText().substring(1));
-                if(b >= 0 && b < 10000){
-                    interp.setText(intToString(b));
-                } else {
-                    interp.setText("Improper Input");
+                    interp.setText("Improper Input: Out of Range");
                 }
             }
-        } catch(Exception e){
-            interp.setText("Improper Input");
+            // Check if the value is positive
+            else if (wordField.getText().charAt(0) == '+') {
+                int b = Integer.parseInt(wordField.getText().substring(1));
+                if (b >= 0 && b < 9999) {
+                    interp.setText(intToString(b));
+                } else {
+                    interp.setText("Improper Input: Out of Range");
+                }
+            }
+            // Check if it's a positive or zero number without sign
+            else {
+                int b = Integer.parseInt(wordField.getText());
+                if (b >= 0 && b < 9999) {
+                    interp.setText(intToString(b));
+                } else {
+                    interp.setText("Improper Input: Out of Range");
+                }
+            }
+        } catch (Exception e) {
+            interp.setText("Improper Input: Not a valid number");
         }
     }
 
