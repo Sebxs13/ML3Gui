@@ -10,9 +10,9 @@ import java.util.Scanner;
 
 public class Machine {
     //constructor: builds memory
-    Memory memory;
-    int accumulator = 0;
-    int index;
+    public Memory memory;
+    public int accumulator = 0;
+    public int index;
     String returnValue;
 
     boolean awaitingRead;
