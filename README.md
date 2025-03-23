@@ -32,6 +32,6 @@
 1. At the top of the page there will be three tabs make sure you are on the tab that is labeled "run"
 2. On the page to the right there will be a scroll pane that lists all the commands loaded
 3. Beneath that there will be three buttons "add line", "delete line", and "submit changes"
-4. To add a new command click add line and a new line to type command in a will be added to the bottom of the scroll pane
-5. To remove a command click delete command and a line at the bottom of the scroll pane will be removed
+4. To add a new command select a box and click add line and a new line to type command in a will be added to the above the selected command
+5. To remove a command select a box click delete command and the line will be removed
 6. To edit current commands type into one of the text boxes and type in your new command. After click submit changes
