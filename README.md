@@ -14,8 +14,8 @@
 8. The output field will keep you updated on when the program is finished
 
 ## Running Test Files
-1. navigate to test directory file location in terminal
-2. then type java MachineUnitTests.java
+1. Open a compiler
+2. Navigate to the test files and run
 
 ## How to copy and paste
 1. At the top of the page there will be three tabs click on the tab that says "file in plain text"
