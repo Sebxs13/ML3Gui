@@ -15,7 +15,7 @@
 <HBox fx:id="background1" alignment="TOP_LEFT" spacing="20.0" xmlns:fx="http://javafx.com/fxml" style= "-fx-background-color: #4C721D"
       fx:controller="org.example.milestone3mlgui.MLGuiController">
     <TabPane>
-        <Tab text ="Run">
+        <Tab text ="Run" closable="false">
            <HBox spacing = "20.0">
                <padding>
                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
@@ -45,7 +45,7 @@
                </VBox>
            </HBox>
         </Tab>
-        <Tab text="file in plain text">
+        <Tab text="file in plain text" closable="false">
             <HBox  alignment="TOP_CENTER" spacing= "20.0">
                 <VBox fx:id="interior4" alignment="TOP_LEFT" spacing="20.0">
                     <padding>
@@ -58,7 +58,7 @@
             </HBox>
 
         </Tab>
-        <Tab text ="Settings">
+        <Tab text ="Settings" closable="false">
             <HBox alignment="TOP_CENTER">
 
                 <padding>

@@ -138,7 +138,7 @@ public class MLGuiController {
         if (fileToSave != null) {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileToSave))) {
                 for (WordGui wordGui : MLApplication.GuiMemory) {
-                    writer.write(wordGui.getValue() + "\n"); // Save each value
+                    writer.write(wordGui.getStringValue() + "\n"); // Save each value
                 }
                 writer.flush();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -213,14 +213,28 @@ public class MLGuiController {
         File selectedFile = fileChooser.showOpenDialog(null);
 
         if(selectedFile != null){
+            /* originally pushed to the machine
             try {
                 m.parse(selectedFile);
                 OutputArea.setText("File successfully loaded into memory\n");
             } catch (IllegalArgumentException | FileNotFoundException e) {
                 OutputArea.setText("Error: " + e.getMessage());
             }
+             */
+            ArrayList<WordGui> a = MLApplication.GuiMemory;
+            try{
+                Scanner sc = new Scanner(selectedFile);
+                int index = 0;
+                while (sc.hasNextLine() && index < 100) {
+                    String line = sc.nextLine();
+                    a.get(index).setValue(line);
+                    index++;
+                }
+            } catch(Exception e) {
+                OutputArea.setText("Error: " + e.getMessage());
+            }
         }
-        MemMachineToGui();
+        //MemMachineToGui();
         addMLPlainText();
     }
 
