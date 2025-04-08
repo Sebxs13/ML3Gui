@@ -152,14 +152,14 @@ public class Machine {
 
     //parse
     public void parse(File file) throws FileNotFoundException {
-        int min_value = -9999;
-        int max_value = 9999;
+        int min_value = -999999;
+        int max_value = 999999;
         int index = 0;
         Scanner scanner = new Scanner(file);
         StringBuilder errorMessages = new StringBuilder();
 
         try {
-            while (scanner.hasNextLine() && index < 100) {
+            while (scanner.hasNextLine() && index < 250) {
                 int line = Integer.parseInt(scanner.nextLine().trim());
                 boolean isValid = true;
 
