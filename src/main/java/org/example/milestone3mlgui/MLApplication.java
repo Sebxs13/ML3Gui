@@ -24,7 +24,7 @@ public class MLApplication extends Application {
         VBox v = (VBox)scene.lookup("#MemContainer");
 
         GuiMemory = new ArrayList<WordGui>();
-        for(int i = 0; i < 100; i++){
+        for(int i = 0; i < 250; i++){
             GuiMemory.add(new WordGui(i));
         }
 
